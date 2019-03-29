@@ -32,10 +32,10 @@ static char		**ft_mem(char **words, char *str, char *c)
 {
 	int num;
 	int i;
-	int j;
+	//int j;
 
 	i = 1;
-	j = 0;
+	//j = 0;
 	num = 1;
 	if (ft_s(str[0], c) == 1)
 		num = 2;
