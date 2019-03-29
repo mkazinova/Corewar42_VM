@@ -1,14 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rew.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mraynor <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/17 03:18:23 by mraynor           #+#    #+#             */
-/*   Updated: 2019/03/17 03:18:26 by mraynor          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+** DISCLAIMER: THIS PART OF CODE IS NOT MINE,
+** IT WAS WRITTEN BY MY TEAMMATE ANASTASIA (Mraynor)
+** BUT IT IS NEEDED FOR VISUALIZATION
+*/
 
 #include "virt_m.h"
 

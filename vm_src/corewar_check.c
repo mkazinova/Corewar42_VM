@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 15:14:29 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/05 13:20:57 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:35:30 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,12 @@ static void	delete_car(t_car **car, t_list *prev, t_list *next, t_list **cars)
 void		delete_dead_cars(t_list **cars, int cycles_passed,
 	int cycles_to_die, t_debug_mode *debug)
 {
-	t_list	*ptr;
-	t_car	*car;
-	t_list	*prev;
-	t_list	*next;
-
-	prev = NULL;
-	ptr = *cars;
+	t_list *prev = NULL;
+	t_list *ptr = *cars;
 	while (ptr)
 	{
-		car = (t_car *)ptr->content;
-		next = ptr->next;
+		t_car *car = (t_car *)ptr->content;
+		t_list *next = ptr->next;
 		if (cycles_passed - car->last_alive_time >= cycles_to_die)
 		{
 			if (debug->show_deaths)

@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 13:10:26 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/14 16:21:20 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:31:50 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 #include "op.h"
 
 /*
-** Checks whether yhere is already a player with this number
+** Checks whether there is already a player with this number
 */
 
 _Bool	player_num_ok(int num, t_list *champs_list)
 {
-	t_champ *ch;
-
 	while (champs_list)
 	{
-		ch = (t_champ *)champs_list->content;
+		t_champ *ch = (t_champ *)champs_list->content;
 		if (ch->player_num == num)
 			return (0);
 		champs_list = champs_list->next;
@@ -38,9 +36,7 @@ _Bool	player_num_ok(int num, t_list *champs_list)
 
 int		get_next_num(t_list *champs_list)
 {
-	int current;
-
-	current = 1;
+	int current = 1;
 	while (!player_num_ok(current, champs_list))
 		current++;
 	return (current);
@@ -53,11 +49,9 @@ int		get_next_num(t_list *champs_list)
 
 _Bool	num_was_auto_assigned(int num, t_list *champs_list)
 {
-	t_champ *ch;
-
 	while (champs_list)
 	{
-		ch = (t_champ *)champs_list->content;
+		t_champ *ch = (t_champ *)champs_list->content;
 		if (ch->player_num == num)
 			return (ch->num_auto_assigned);
 		champs_list = champs_list->next;
@@ -72,15 +66,12 @@ _Bool	num_was_auto_assigned(int num, t_list *champs_list)
 
 _Bool	replace_auto_assigned(t_list *champs_list, int num)
 {
-	t_champ	*ch;
-	int		next_num;
-
 	if (!num_was_auto_assigned(num, champs_list))
 		return (0);
-	next_num = get_next_num(champs_list);
+	int next_num = get_next_num(champs_list);
 	while (champs_list)
 	{
-		ch = (t_champ *)champs_list;
+		t_champ *ch = (t_champ *)champs_list;
 		if (ch->player_num == num)
 			ch->player_num = next_num;
 		champs_list = champs_list->next;
@@ -91,9 +82,9 @@ _Bool	replace_auto_assigned(t_list *champs_list, int num)
 _Bool	attach_champ(t_champ *champ, t_list **champs_list, _Bool *error_shown)
 {
 	t_list	*lst;
-
 	if (!(lst = ft_lstnew_nocpy(champ, sizeof(t_champ *))))
 		return (0);
+
 	if (!(*champs_list))
 	{
 		*champs_list = lst;

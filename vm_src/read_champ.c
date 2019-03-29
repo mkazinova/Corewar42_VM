@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 13:10:26 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/22 16:31:23 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:44:53 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 
 _Bool	check_magic_header(unsigned char *header, _Bool *error_shown)
 {
-	int magic;
-
-	magic = parse_bits(header, 0, 4);
+	int magic = parse_bits(header, 0, 4);
 	if (magic != COREWAR_EXEC_MAGIC)
 	{
 		ft_putendl("Error: Invalid magic header!");
@@ -36,9 +34,7 @@ _Bool	check_magic_header(unsigned char *header, _Bool *error_shown)
 _Bool	process_bot_size(unsigned char *buff, t_champ *champ, char *filename,
 	_Bool *error_shown)
 {
-	int size;
-
-	size = parse_bits(buff, 0, 4);
+	int size = parse_bits(buff, 0, 4);
 	champ->bot_size = size;
 	if (size > CHAMP_MAX_SIZE)
 	{
@@ -60,7 +56,6 @@ _Bool	file_is_ended(int fd, char *filename, _Bool *error_shown)
 {
 	char	buf[1];
 	int		r;
-
 	if ((r = read(fd, buf, 1)) > 0)
 	{
 		ft_printf("Error: File %s has a code size ", filename);

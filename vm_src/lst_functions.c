@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 15:13:34 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/02/15 18:17:24 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:40:13 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int		lst_len(t_list *lst)
 {
-	int len;
-
-	len = 0;
+	int len = 0;
 	while (lst)
 	{
 		len++;

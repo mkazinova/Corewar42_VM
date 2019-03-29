@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 17:19:29 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/21 15:52:01 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:39:07 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 t_car	*init_car(t_champ *champ, int num_players, t_war *war)
 {
 	t_car	*result;
-
 	if (!(result = (t_car *)malloc(sizeof(t_car))))
 	{
 		ft_putendl("Memory allocation error.\n");
 		return (NULL);
 	}
+
 	result->id = war->max_carname + 1;
 	war->max_carname++;
 	result->carry = 0;
@@ -42,12 +42,12 @@ t_car	*init_car(t_champ *champ, int num_players, t_war *war)
 _Bool	attach_car_to_list(t_car *car, t_list **cars_list)
 {
 	t_list	*lst;
-
 	if (!(lst = ft_lstnew_nocpy(car, sizeof(t_car *))))
 	{
 		ft_putendl("Memory allocation error.\n");
 		return (0);
 	}
+
 	if (!(*cars_list))
 		*cars_list = lst;
 	else
@@ -57,16 +57,12 @@ _Bool	attach_car_to_list(t_car *car, t_list **cars_list)
 
 t_list	*initialize_cars(t_list *champions, t_war *war)
 {
-	t_champ		*champ;
-	t_car		*current_car;
-	t_list		*cars;
-	int			num_players;
-
-	cars = NULL;
-	num_players = lst_len(champions);
+	t_list *cars = NULL;
+	int num_players = lst_len(champions);
 	while (champions)
 	{
-		champ = (t_champ *)champions->content;
+		t_champ *champ = (t_champ *)champions->content;
+		t_car *current_car;
 		if (!(current_car = init_car(champ, num_players, war)))
 		{
 			ft_lstdel(&cars, del_car);

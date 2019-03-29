@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 18:47:08 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/21 16:56:19 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:24:38 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,14 @@ static int		get_d_i_arg_val(t_car *car, t_war *war,
 _Bool			collect_args_bw(t_war *war, t_car *car, int *args,
 	unsigned char *argcodes)
 {
-	int				off;
-	int				i;
-	int				parse_size;
-
-	off = 2;
-	i = -1;
+	int off = 2;
+	int i = -1;
 	while (++i < 3)
 	{
+		int	parse_size;
 		if (argcodes[i] == REG_CODE)
 		{
+			parse_size = 1;
 			car->args[i] = parse_bits(war->memory, car->position + off, 1);
 			if (car->args[i] <= 0 || car->args[i] > REG_NUMBER)
 				return (0);
@@ -84,14 +82,12 @@ _Bool			collect_args_bw(t_war *war, t_car *car, int *args,
 
 void			perform_bitwise(t_war *war, t_car *car)
 {
-	unsigned char	codage;
-	int				args[3];
-
-	codage = parse_bits(war->memory, car->position + 1, 1);
+	unsigned char codage = parse_bits(war->memory, car->position + 1, 1);
 	fill_arg_codes(car, codage, 3);
 	car->bytes_to_next_op = get_bytes_to_skip(codage, 3, 4);
 	if (bitwise_codes_ok(car->arg_codes))
 	{
+		int	args[3];
 		if (collect_args_bw(war, car, args, car->arg_codes))
 		{
 			if (car->op_code == 6)

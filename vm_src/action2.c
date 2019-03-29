@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 14:23:20 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/25 14:23:40 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:30:00 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 
 static void	store_reg_into_memory(t_war *war, t_car *car, int reg_num)
 {
-	short	skip;
-
 	car->args[1] = (short)parse_bits(war->memory, car->position + 3, IND_SIZE);
-	skip = car->args[1] % IDX_MOD;
+	short skip = car->args[1] % IDX_MOD;
 	fill_memory_with_value(war, car->position + skip, car->reg[reg_num - 1]);
 	car->op_success = 1;
 }
@@ -31,9 +29,7 @@ static void	store_reg_into_memory(t_war *war, t_car *car, int reg_num)
 
 void		perform_store(t_war *war, t_car *car)
 {
-	unsigned char	codage;
-
-	codage = parse_bits(war->memory, car->position + 1, 1);
+	unsigned char codage = parse_bits(war->memory, car->position + 1, 1);
 	fill_arg_codes(car, codage, 2);
 	car->bytes_to_next_op = get_bytes_to_skip(codage, 2, 4);
 	if (car->arg_codes[0] == REG_CODE &&
@@ -64,10 +60,7 @@ void		perform_store(t_war *war, t_car *car)
 
 void		perform_arithmetics(t_war *war, t_car *car)
 {
-	unsigned char	codage;
-	int				result;
-
-	codage = parse_bits(war->memory, car->position + 1, 1);
+	unsigned char codage = parse_bits(war->memory, car->position + 1, 1);
 	fill_arg_codes(car, codage, 3);
 	car->bytes_to_next_op = get_bytes_to_skip(codage, 3, 4);
 	if (car->arg_codes[0] == REG_CODE && car->arg_codes[1] == REG_CODE
@@ -80,6 +73,7 @@ void		perform_arithmetics(t_war *war, t_car *car)
 			car->args[1] > 0 && car->args[1] <= REG_NUMBER &&
 			car->args[2] > 0 && car->args[2] <= REG_NUMBER)
 		{
+			int	result;
 			if (car->op_code == 4)
 				result = car->reg[car->args[0] - 1] +
 					car->reg[car->args[1] - 1];
@@ -114,10 +108,7 @@ void		perform_zjmp(t_war *war, t_car *car)
 
 void		perform_aff(t_war *war, t_car *car, t_debug_mode *debug)
 {
-	char			ch;
-	unsigned char	codage;
-
-	codage = parse_bits(war->memory, car->position + 1, 1);
+	unsigned char codage = parse_bits(war->memory, car->position + 1, 1);
 	car->num_args = 1;
 	car->bytes_to_next_op = get_bytes_to_skip(codage, car->num_args, 4);
 	car->arg_codes[0] = REG_CODE;
@@ -125,7 +116,7 @@ void		perform_aff(t_war *war, t_car *car, t_debug_mode *debug)
 	if (codage == 0x40 && car->args[0] > 0 && car->args[0] <= REG_NUMBER)
 	{
 		car->op_success = 1;
-		ch = car->reg[car->args[0] - 1];
+		char ch = car->reg[car->args[0] - 1];
 		if (debug->show_aff)
 			ft_putchar(ch);
 	}

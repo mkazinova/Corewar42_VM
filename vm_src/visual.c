@@ -1,14 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   visual.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mraynor <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/05 20:27:37 by mraynor           #+#    #+#             */
-/*   Updated: 2019/03/05 20:27:40 by mraynor          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+** DISCLAIMER: THIS PART OF CODE IS NOT MINE,
+** IT WAS WRITTEN BY MY TEAMMATE ANASTASIA (Mraynor)
+** BUT IT IS NEEDED FOR VISUALIZATION
+*/
 
 #include "virt_m.h"
 

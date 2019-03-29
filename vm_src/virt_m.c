@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 16:42:30 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/22 16:12:01 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:46:25 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@
 
 _Bool			bad_player_numbers(t_list *champs)
 {
-	int		max;
-	t_champ	*ch;
-
-	max = lst_len(champs);
+	int max = lst_len(champs);
 	while (champs)
 	{
-		ch = (t_champ *)champs->content;
+		t_champ *ch = (t_champ *)champs->content;
 		if (ch->player_num > max || ch->player_num < 1 ||
 			ch->player_num > MAX_PLAYERS)
 		{
@@ -40,9 +37,7 @@ _Bool			bad_player_numbers(t_list *champs)
 
 t_list			*get_champs(int argc, char **argv, int *i)
 {
-	t_list	*champions;
-
-	champions = NULL;
+	t_list *champions = NULL;
 	while (*i < argc)
 	{
 		if (!(get_next_champion(argv, i, &champions)))
@@ -72,21 +67,19 @@ void			show_usage_and_exit(void)
 
 int				main(int argc, char **argv)
 {
-	int				i;
-	t_list			*champs;
-	t_war			war;
-	t_debug_mode	*debug;
-
 	setlocale(LC_CTYPE, "C-UTF-8");
-	i = 1;
+	int i = 1;
+	t_debug_mode *debug;
 	if (argc == 1 || !(debug = get_debug_mode(argv, &i)))
 		show_usage_and_exit();
+
+	t_list *champs;
 	if (!(champs = get_champs(argc, argv, &i)) || bad_player_numbers(champs))
 	{
 		clean_all(0, &champs, &debug);
 		return (0);
 	}
-	war = initialize_corewar(champs);
+	t_war war = initialize_corewar(champs);
 	if (!(war.cars = initialize_cars(champs, &war)))
 	{
 		clean_all(0, &champs, &debug);

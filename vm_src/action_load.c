@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 17:57:14 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/19 16:22:27 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:26:24 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ static int		parse_number_for_load(t_war *war, t_car *car, short skip)
 
 static int		get_first_arg_for_ind(t_war *war, t_car *car)
 {
-	int result;
-
-	result = (short)parse_bits(war->memory, car->position + 2, IND_SIZE);
+	int result = (short)parse_bits(war->memory, car->position + 2, IND_SIZE);
 	return (result);
 }
 
@@ -52,15 +50,12 @@ static int		get_first_arg_for_ind(t_war *war, t_car *car)
 
 void			perform_load(t_war *war, t_car *car)
 {
-	unsigned char	codage;
-	int				number;
-	short			skip;
-
-	codage = parse_bits(war->memory, car->position + 1, 1);
+	unsigned char codage = parse_bits(war->memory, car->position + 1, 1);
 	fill_arg_codes(car, codage, 2);
 	car->bytes_to_next_op = get_bytes_to_skip(codage, 2, 4);
 	if (load_codes_ok(car->arg_codes))
 	{
+		int number;
 		if (car->arg_codes[0] == DIR_CODE)
 		{
 			car->args[0] = parse_bits(war->memory, car->position + 2, 4);
@@ -70,7 +65,7 @@ void			perform_load(t_war *war, t_car *car)
 		else
 		{
 			car->args[0] = get_first_arg_for_ind(war, car);
-			skip = (car->op_code == 2 ? car->args[0] % IDX_MOD : car->args[0]);
+			short skip = (car->op_code == 2 ? car->args[0] % IDX_MOD : car->args[0]);
 			number = parse_number_for_load(war, car, skip);
 			car->args[1] = parse_bits(war->memory, car->position + 4, 1);
 		}

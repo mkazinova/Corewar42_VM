@@ -1,14 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   other_viz.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mraynor <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/20 18:31:08 by mraynor           #+#    #+#             */
-/*   Updated: 2019/03/20 18:31:11 by mraynor          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+** DISCLAIMER: THIS PART OF CODE IS NOT MINE,
+** IT WAS WRITTEN BY MY TEAMMATE ANASTASIA (Mraynor)
+** BUT IT"S NEEDED FOR VISUALIZATION
+*/
 
 #include <ncurses.h>
 #include "virt_m.h"

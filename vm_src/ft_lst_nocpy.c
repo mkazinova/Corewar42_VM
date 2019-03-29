@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 14:45:24 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/02/14 16:13:41 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:37:12 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 t_list	*ft_lstnew_nocpy(void const *content, size_t content_size)
 {
 	t_list *new_list;
-
 	if (!(new_list = malloc(sizeof(t_list))))
 		return (NULL);
+
 	if (content)
 	{
 		new_list->content = (void *)content;
@@ -34,9 +34,7 @@ t_list	*ft_lstnew_nocpy(void const *content, size_t content_size)
 
 int		ft_list_len(t_list *lst)
 {
-	int result;
-
-	result = 0;
+	int result = 0;
 	while (lst)
 	{
 		result++;

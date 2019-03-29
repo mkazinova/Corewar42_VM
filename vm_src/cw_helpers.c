@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:52:02 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/18 19:10:45 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:36:52 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@
 
 unsigned int	parse_bits(unsigned char *memory, int start, int num_bytes)
 {
-	unsigned int	result;
-	int				i;
-
-	result = 0;
-	i = 0;
+	unsigned int result = 0;
+	int i = 0;
 	while (i < num_bytes)
 	{
 		result *= 16 * 16;
@@ -65,9 +62,7 @@ void			load_num_into_reg(t_car *car, int reg, int num)
 
 void			fill_memory_with_value(t_war *war, int pos, unsigned int value)
 {
-	int	i;
-
-	i = 3;
+	int i = 3;
 	while (i >= 0)
 	{
 		war->memory[get_pos(pos + i)] = value & 0b11111111;

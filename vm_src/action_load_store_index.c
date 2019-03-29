@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 16:00:37 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/20 19:14:28 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:24:21 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,8 @@ static int		get_dir_ind_arg_value(t_car *car, t_war *war,
 _Bool			collect_args_ldsi(t_war *war, t_car *car, int *args,
 	unsigned char *argcodes)
 {
-	int				offset;
-	int				i;
-
-	offset = 2;
-	i = -1;
+	int offset = 2;
+	int i = -1;
 	while (++i < 3)
 	{
 		if (argcodes[i] == REG_CODE)
@@ -92,18 +89,16 @@ _Bool			collect_args_ldsi(t_war *war, t_car *car, int *args,
 
 void			perform_load_store_index(t_war *war, t_car *car)
 {
-	unsigned char	codage;
-	int				args[3];
-	int				skip;
-
-	codage = parse_bits(war->memory, car->position + 1, 1);
+	unsigned char codage = parse_bits(war->memory, car->position + 1, 1);
 	car->bytes_to_next_op = get_bytes_to_skip(codage, 3, 2);
 	fill_arg_codes(car, codage, 3);
+
 	if (load_store_index_codes_ok(car->op_code, car->arg_codes))
 	{
+		int	args[3];
 		if (collect_args_ldsi(war, car, args, car->arg_codes))
 		{
-			skip = (car->op_code != 11 ? args[0] + args[1] : args[1] + args[2]);
+			int skip = (car->op_code != 11 ? args[0] + args[1] : args[1] + args[2]);
 			skip = (car->op_code != 14 ? skip % IDX_MOD : skip);
 			if (car->op_code == 10 || car->op_code == 14)
 				load_num_into_reg(car, args[2], parse_bits(war->memory,

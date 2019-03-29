@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 15:42:01 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/22 15:23:45 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:34:48 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 void	del_champ(void *content)
 {
-	t_champ *champ;
-
-	champ = (t_champ *)content;
+	t_champ *champ = (t_champ *)content;
 	free(champ->bot_code);
 	champ->bot_code = NULL;
 	free(champ);
@@ -26,9 +24,7 @@ void	del_champ(void *content)
 
 void	del_car(void *content, size_t size)
 {
-	t_car *car;
-
-	car = (t_car *)content;
+	t_car *car = (t_car *)content;
 	free(car);
 	car = NULL;
 	size++;
@@ -36,11 +32,9 @@ void	del_car(void *content, size_t size)
 
 void	clear_champions(t_list **champions)
 {
-	t_list	*ptr;
-
 	if (champions && *champions)
 	{
-		ptr = *champions;
+		t_list *ptr = *champions;
 		while (ptr)
 		{
 			del_champ(ptr->content);
@@ -52,15 +46,13 @@ void	clear_champions(t_list **champions)
 
 void	clean_all(t_war *war, t_list **champions, t_debug_mode **debug)
 {
-	int		quote_index;
-
 	if (war)
 	{
 		if (war->cars)
 			ft_lstdel(&war->cars, del_car);
 		if (war->quotes)
 		{
-			quote_index = 0;
+			int quote_index = 0;
 			while (quote_index < 6)
 			{
 				free(war->quotes[quote_index]);

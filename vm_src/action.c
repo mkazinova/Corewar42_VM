@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 14:18:05 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/13 13:22:32 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:28:34 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ int			get_bytes_to_skip(unsigned char codage, char num_args,
 	char dir_size)
 {
 	unsigned char	arg_sizes[3];
-	int				i;
-	int				result;
-
 	arg_sizes[0] = first_bits(codage);
 	arg_sizes[1] = second_bits(codage);
 	arg_sizes[2] = third_bits(codage);
-	i = 0;
-	result = 2;
+
+	int i = 0;
+	int result = 2;
 	while (i < num_args)
 	{
 		if (arg_sizes[i] == DIR_CODE)
@@ -46,10 +44,7 @@ int			get_bytes_to_skip(unsigned char codage, char num_args,
 void		perform_live(t_war *war, t_car *car, t_list *champions,
 	t_debug_mode *debug)
 {
-	short			player_number;
-	t_champ			*champ;
-
-	player_number = parse_bits(war->memory, car->position + 1, 4) * -1;
+	short player_number = parse_bits(war->memory, car->position + 1, 4) * -1;
 	car->args[0] = player_number;
 	car->num_args = 1;
 	car->arg_codes[0] = DIR_CODE;
@@ -60,7 +55,7 @@ void		perform_live(t_war *war, t_car *car, t_list *champions,
 	if (player_number > 0 && player_number <= war->num_players)
 	{
 		war->last_alive_id = player_number;
-		champ = find_champion(champions, player_number);
+		t_champ *champ = find_champion(champions, player_number);
 		if (debug->show_lives)
 			ft_printf("Player %d (%s) is said to be alive)\n", player_number,
 				champ->bot_name);
@@ -99,9 +94,7 @@ void		make_current_action(t_war *war, t_car *car, t_list *champions,
 
 void		show_operation(t_car *car)
 {
-	int	i;
-
-	i = 0;
+	int i = 0;
 	if (car->op_success)
 	{
 		ft_printf("Process %d\tperforms %s\t", car->id,
@@ -130,13 +123,10 @@ void		show_operation(t_car *car)
 void		perform_actions(t_war *war, t_list *champions,
 	t_debug_mode *debug)
 {
-	t_car	*car;
-	t_list	*ptr;
-
-	ptr = war->cars;
+	t_list *ptr = war->cars;
 	while (ptr)
 	{
-		car = (t_car *)ptr->content;
+		t_car *car = (t_car *)ptr->content;
 		if (car->cycles_until_action <= 0)
 		{
 			car->op_code = war->memory[car->position];

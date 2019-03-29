@@ -6,7 +6,7 @@
 /*   By: msnow-be <msnow-be@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 16:38:42 by msnow-be          #+#    #+#             */
-/*   Updated: 2019/03/14 15:00:08 by msnow-be         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:36:18 by msnow-be         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 
 t_champ			*find_champion(t_list *champions, unsigned char id)
 {
-	t_champ *current_champ;
-
 	while (champions)
 	{
-		current_champ = (t_champ *)champions->content;
+		t_champ *current_champ = (t_champ *)champions->content;
 		if (current_champ->player_num == id)
 			return (current_champ);
 		champions = champions->next;
@@ -45,8 +43,6 @@ static _Bool	run_cycle(t_war *war, t_list *champions, t_debug_mode *debug)
 
 void			corewar(t_war *war, t_list *champions, t_debug_mode *debug)
 {
-	t_champ		*winner;
-
 	introduce_champions(champions);
 	war->quotes = (char **)ft_memalloc(6 * sizeof(char *));
 	if (debug->visualize)
@@ -63,7 +59,7 @@ void			corewar(t_war *war, t_list *champions, t_debug_mode *debug)
 		print_ncurses1(war, champions, -1, 1);
 		endwin();
 	}
-	winner = find_champion(champions, war->last_alive_id);
+	t_champ *winner = find_champion(champions, war->last_alive_id);
 	ft_printf("Contestant %d, \"%s\", has won !\n",
 		winner->player_num, winner->bot_name);
 }
