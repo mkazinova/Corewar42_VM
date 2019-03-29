@@ -7,7 +7,7 @@ VM_OBJ_DIR = ./vm_obj/
 LIB_DIR = ./libft/
 
 VM_SRC = $(addprefix $(VM_SRC_DIR),$(VM_SRC_NAMES))
-VM_SRC_NAMES = clear_vm.c ft_lst_nocpy.c parse_champion.c virt_m.c lst_functions.c \
+VM_SRC_NAMES = clear_vm.c ft_lst_nocpy.c parse_champion.c main.c lst_functions.c \
 		print_memory.c initialize_corewar.c initialize_cars.c op.c \
 		introduce_champions.c corewar.c cw_helpers.c action.c \
 		action2.c action_bitwise.c action_fork.c get_bits.c action_load.c \
